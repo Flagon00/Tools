@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/IFEp5Cq.png" alt="Logo" width="80" height="80">
+  <img src="https://i.imgur.com/kwq7YW5.png" alt="Logo" width="80" height="80">
   <h3 align="center">Golang Tools</h3>
   <p align="center">
     Just import and use!

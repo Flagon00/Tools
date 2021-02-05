@@ -1,7 +1,8 @@
 package tools
 
 import (
-	"math/rand"
+	"math/rand"	
+	"io/ioutil"
 	"strings"
 	"errors"
 	"bufio"
@@ -125,6 +126,59 @@ func SpecifyLineByText(filePath string, str string) (string, error) {
 	}
 
 	return "", errors.New("The line cannot be found")
+}
+
+// Synonym return combine text from file
+func FileMix(filePath string, start string, end string, betweenWords string) (string, error) {
+	fileHandle, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		return "", err
+	}
+
+	// Convert bytes to strings
+	byteToString := string(fileHandle)
+
+	// Make loop for choose synonyms
+	for {
+		// Too fast, too furious
+		time.Sleep(time.Microsecond * 100)
+
+		// Getting words between brackets
+		synonym, err := GetStringInBetween(byteToString, start, end)
+		if err != nil {
+			break
+		}
+
+		// Split and add make list
+		synonymSplited := strings.Split(synonym, betweenWords)
+
+		// Choose synonym
+		byteToString = strings.Replace(byteToString, fmt.Sprint(start, synonym, end), synonymSplited[Random(0, cap(synonymSplited)-1)], 1)
+	}
+
+	return byteToString, nil
+}
+
+// Synonym return combine text from string
+func StringMix(text string, start string, end string, betweenWords string) string{
+	for {
+		// Too fast, too furious
+		time.Sleep(time.Microsecond * 100)
+		
+		// Getting words between brackets
+		synonym, err := GetStringInBetween(text, start, end)
+		if err != nil {
+			break
+		}
+
+		// Split and add make list
+		synonymSplited := strings.Split(synonym, betweenWords)
+
+		// Choose synonym
+		text = strings.Replace(text, fmt.Sprint(start, synonym, end), synonymSplited[Random(0, cap(synonymSplited)-1)], 1)
+	}
+
+	return text
 }
 
 // Exists check a file exists
